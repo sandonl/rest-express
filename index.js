@@ -40,6 +40,14 @@ app.get("/comments", (req, res) => {
   res.render("comments/index", { comments });
 });
 
+app.patch("/comments/:id", (req, res) => {
+  const { id } = req.params;
+  const newCommentText = req.body.comment;
+  const foundComment = comments.find((c) => c.id === id);
+  foundComment.comment = newCommentText;
+  res.redirect("/comments");
+});
+
 app.get("/comments/new", (req, res) => {
   res.render("comments/new");
 });
